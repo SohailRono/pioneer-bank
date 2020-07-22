@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="login-area" class="my-5">
+        <div class="text-center text-warning bg-info rounded p-3 m-3">
+            <h4>Welcome to Pioneer Bank</h4>
+        </div>
+        <div class="shadow bg-white rounded p-3 m-3">
+            <h4 class="text-center text-info">Login</h4>
+            <input type="text" name="userid" id="userid" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" name="password" id="password" class="form-control " placeholder="Password">
+            <br>
+            <button id="btnLogin" class="btn btn-success">Login</button>
+
+        </div>
+    </div>
+
+    <div id="transaction-area" class="d-none">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="depositBox rounded text-white p-3 m-3">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdrawBox rounded text-white p-3 m-3">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="currentWithdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balanceBox rounded text-white p-3 m-3">
+                    <h5>Balance</h5>
+                    <h2>$<span id="currentBalance">100</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="shadow bg-white rounded p-3 m-1">
+                    <h5>Deposit</h5>
+                    <input type="text" name="deposit" id="depositAmt" class="form-control"
+                        placeholder="$ amount you want to deposit"><br>
+                    <button id="btnDeposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="shadow bg-white rounded p-3 m-1">
+                    <h5>Withdraw</h5>
+                    <input type="text" name="withdraw" id="withdrawAmt" class="form-control"
+                        placeholder="$ amount you want to withdraw"><br>
+                    <button id="btnWithdraw" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //login button eventHandler
+        const loginBtn = document.getElementById('btnLogin');
+        loginBtn.addEventListener('click', function () {
+            const loginArea = document.getElementById('login-area');
+            loginArea.style.display = 'none';
+
+            const trnArea = document.getElementById('transaction-area');
+            trnArea.className = "d-block mt-5";
+        })
+
+        //deposit button eventHandler
+        const depositBtn = document.getElementById('btnDeposit');
+        depositBtn.addEventListener('click', function(){
+            const depositAmt =parseFloat(document.getElementById('depositAmt').value);
+            updateAmount('currentDeposit',depositAmt);
+            updateAmount('currentBalance',depositAmt);
+            document.getElementById('depositAmt').value = "";
+
+
+        })
+
+        //withdraw button eventHandler
+        const withdrawBtn = document.getElementById('btnWithdraw');
+        withdrawBtn.addEventListener('click', function(){
+            const withdrawAmt =parseFloat(document.getElementById('withdrawAmt').value);
+            updateAmount('currentWithdraw',withdrawAmt);
+            updateAmount('currentBalance', -1 * withdrawAmt);
+            document.getElementById('withdrawAmt').value = "";
+
+
+        })
+
+        //deposit or withdraw button function
+        function updateAmount(id,Amount){
+            const currentBal =parseFloat(document.getElementById(id).innerText);
+            const total = Amount + currentBal;
+            document.getElementById(id).innerText = total;
+        }
+    </script>
+</body>
+
+</html>

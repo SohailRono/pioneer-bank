@@ -1,0 +1,16 @@
+body{
+    max-width: 800px;
+    margin: auto;
+}
+
+.depositBox{
+    background-color: slateblue;
+}
+
+.withdrawBox{
+    background-color: salmon;
+}
+
+.balanceBox{
+    background-color: orange;
+}
